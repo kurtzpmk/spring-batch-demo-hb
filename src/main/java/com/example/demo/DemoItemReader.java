@@ -19,14 +19,14 @@ public class DemoItemReader extends MultiResourceItemReader<Game> {
     } catch (IOException e) {
       e.printStackTrace();
     }
-    setName("demoMultiItemReader");
+    setName("MultiResourceItemReader");
     setResources(inputResources);
     setDelegate(customFlatFileItemReader());
   }
 
   public FlatFileItemReader<Game> customFlatFileItemReader() {
     return new FlatFileItemReaderBuilder<Game>()
-        .name("demoItemReader")
+        .name("FlatFileItemReader")
         .delimited()
         .names("gameNumber", "gameLength")
         .targetType(Game.class)

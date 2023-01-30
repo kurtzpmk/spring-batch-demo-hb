@@ -31,8 +31,8 @@ public class BatchConfiguration {
   private String filePattern;
 
   @Bean
-  public Job createJob(JobRepository jobRepository, Step createStep) {
-    return new JobBuilder("createJob", jobRepository)
+  public Job createJob() {
+    return new JobBuilder("CreateJob", jobRepository)
         .incrementer(new RunIdIncrementer())
         .start(createStep())
         .next(fileDeleteStep())
@@ -41,7 +41,7 @@ public class BatchConfiguration {
 
   @Bean
   public Step createStep() {
-    return new StepBuilder("createStep", jobRepository)
+    return new StepBuilder("CreateStep", jobRepository)
         .<Game, Game>chunk(2, platformTransactionManager)
         .reader(demoItemReader())
         .writer(demoItemWriter())
@@ -50,7 +50,7 @@ public class BatchConfiguration {
 
   @Bean
   public Step fileDeleteStep() {
-    return new StepBuilder("fileDeleteStep", jobRepository)
+    return new StepBuilder("FileDeleteStep", jobRepository)
         .tasklet(fileDeleteTask(), platformTransactionManager)
         .build();
   }

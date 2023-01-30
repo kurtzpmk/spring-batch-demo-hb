@@ -20,7 +20,7 @@ public class DemoItemWriter implements ItemWriter<Game> {
     for (Chunk<? extends Game>.ChunkIterator chunkIterator = items.iterator(); chunkIterator.hasNext();) {
       Game i = chunkIterator.next();
       FlatFileItemWriter<Game> itemWriter = new FlatFileItemWriter<>();
-      itemWriter.setName("demoItemWriter");
+      itemWriter.setName("DemoItemWriter");
       itemWriter.setResource(new FileSystemResource(pathOutput + i.getFileName()));
       itemWriter.setLineAggregator(customLineAggregator());
       itemWriter.setAppendAllowed(true);
